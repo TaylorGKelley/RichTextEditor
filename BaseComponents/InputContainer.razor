@@ -1,0 +1,32 @@
+﻿@typeparam TValue
+@typeparam TRef where TRef : InputMain.InputMain<TValue>
+
+<div class="input-container" style=@CSSVariables>
+    @if (!System.String.IsNullOrEmpty(Ref.Label) && !PreventDefaultLayout)
+    {
+        <label for="@Ref.Id">
+            @Ref.Label
+            @if (Ref.Required || Ref.Optional)
+            {
+                @(" ")
+                <span optional=@(Ref.Optional) required=@Ref.Required>@(Ref.Required ? "*" : "(optional)")</span>
+            }
+        </label>
+    }
+    <div class="input-wrapper">
+        @ChildContent
+    </div>
+    @if (!PreventDefaultLayout)
+    {
+        <p class="input-error-message @(!System.String.IsNullOrEmpty(Ref.WarningMessage) ? "warning" : "")">@(!System.String.IsNullOrEmpty(Ref.prpErrorMessage) ? Ref.prpErrorMessage : Ref.WarningMessage)</p>
+    }
+</div>
+
+@code {
+    #region Params
+    [Parameter, EditorRequired] public RenderFragment? ChildContent { get; set; }
+    [Parameter, EditorRequired] public TRef Ref { get; set; }
+    [Parameter] public System.String CSSVariables { get; set; } = System.String.Empty;
+    [Parameter] public System.Boolean PreventDefaultLayout { get; set; } = false;
+    #endregion
+}

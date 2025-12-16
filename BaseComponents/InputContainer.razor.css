@@ -1,0 +1,82 @@
+﻿.input-container > ::deep label > span {
+    margin-left: 4px;
+}
+
+    .input-container > ::deep label > span[optional] {
+        color: #777;
+        font-size: 0.75rem;
+    }
+
+    .input-container > ::deep label > span[required] {
+        color: var(--clr-required);
+    }
+
+.input-container {
+    --clr-input-outline: #333;
+    --clr-error: #FF393B;
+    --clr-warning: #E9D502;
+    --clr-required: red;
+    position: relative;
+    width: clamp(200px, 100%, 500px);
+    font-size: 0.9rem;
+}
+
+    .input-container > ::deep label {
+        font-size: 0.9rem;
+        display: block;
+        margin-left: 3px;
+        margin-bottom: 3px;
+    }
+
+    .input-container ::deep input:not(.image-caption),
+    .input-container ::deep textarea {
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        border: 1px solid #ccc;
+        width: clamp(200px, 100%, 500px);
+    }
+
+        .input-container ::deep input:not(.image-caption):focus,
+        .input-container ::deep textarea:focus {
+            outline: 2px auto var(--clr-input-outline);
+        }
+
+        .input-container ::deep input:not(.image-caption):invalid,
+        .input-container ::deep textarea:invalid {
+/*            box-shadow: 0 0 10px var(--clr-error);*/
+        }
+
+::deep .input-error-message {
+    font-size: 13px;
+    height: 1rem;
+    line-height: 1rem;
+    margin-left: 3px;
+    color: var(--clr-error);
+}
+
+    ::deep .input-error-message.warning {
+        color: var(--clr-warning);
+    }
+
+.input-wrapper {
+    position: relative;
+}
+
+::deep .helper-icon > svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.8rem;
+    height: 1rem;
+    width: 1rem;
+    stroke: var(--clr-error) !important;
+}
+
+::deep .helper-icon.warning > svg {
+    stroke: var(--clr-warning) !important;
+}
+
+.input-wrapper ::deep .helper-icon:has(svg) + input,
+.input-wrapper ::deep .helper-icon:has(svg) + textarea {
+    padding-right: 2rem;
+}
